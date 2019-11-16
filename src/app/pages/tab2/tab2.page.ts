@@ -15,8 +15,7 @@ export class Tab2Page {
   }
 
   abriRegistro(registro) {
-    console.log('Registro', registro);
-    
+    this.service.abrirRegistro(registro);
   }
 
 }
