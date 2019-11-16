@@ -1,11 +1,16 @@
 import { Component } from '@angular/core';
-
+import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx';
 @Component({
   selector: 'app-tab1',
   templateUrl: 'tab1.page.html',
   styleUrls: ['tab1.page.scss']
 })
 export class Tab1Page {
+  opciones = {
+    allowSlidePrev: false,
+    allowSlideNext: false
+  };
+  constructor(private bcScanner: BarcodeScanner) {}
 
   //cuando la vista es cargada se dispara
   ionViewDidEnter() {
@@ -17,6 +22,7 @@ export class Tab1Page {
   }
   //cuando la vista va a cargar se dispara
   ionViewWillEnter() {
+    this.scan();
     console.log('ionViewWillEnter');
   }
   //cuando se va a cerra la vista se dispara
@@ -24,6 +30,14 @@ export class Tab1Page {
     console.log('Cuando ya se va a cerrar la vista');
   }
 
-  constructor() {}
+  scan() {
+    this.bcScanner.scan().then(response => {
+      console.log('Abiendo Camera', response);
+      
+    }).catch(error => {
+      console.log('Error', error);
+      
+    })
+  }
 
 }
